@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_mapreduce" default="compile.module.mapreduce">
+  <dirname property="module.mapreduce.basedir" file="${ant.file.module_mapreduce}"/>
+  
+  <property name="module.jdk.home.mapreduce" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.mapreduce" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.mapreduce" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.mapreduce" value="-encoding UTF-8 -source 1.5 -target 1.5 ${compiler.args}"/>
+  
+  <property name="mapreduce.output.dir" value="${module.mapreduce.basedir}/target/classes"/>
+  <property name="mapreduce.testoutput.dir" value="${module.mapreduce.basedir}/target/test-classes"/>
+  
+  <path id="mapreduce.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="mapreduce.module.production.classpath">
+    <path refid="${module.jdk.classpath.mapreduce}"/>
+    <path refid="library.commons-logging-1.2.classpath"/>
+    <path refid="library.zookeeper-3.4.6.classpath"/>
+    <path refid="library.hadoop-hdfs-2.5.1.classpath"/>
+    <path refid="library.log4j-1.2.17.classpath"/>
+    <path refid="library.hbase-client-1.1.2.classpath"/>
+    <path refid="library.hbase-common-1.1.2.classpath"/>
+    <path refid="library.hadoop-mapreduce-client-app-2.5.1.classpath"/>
+    <path refid="library.hadoop-mapreduce-client-common-2.5.1.classpath"/>
+    <path refid="library.hadoop-mapreduce-client-core-2.5.1.classpath"/>
+    <pathelement location="${basedir}/../../../media/ubuntu/e7ab5c87-393b-47fb-81ca-71f09f0748e1/hbase-1.1.2/lib/hadoop-mapreduce-client-shuffle-2.5.1.jar"/>
+    <path refid="library.hadoop-mapreduce-client-jobclient-2.5.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-client:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-common:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-math3:3.1.1.classpath"/>
+    <path refid="library.maven:_xmlenc:xmlenc:0.52.classpath"/>
+    <path refid="library.maven:_commons-net:commons-net:3.1.classpath"/>
+    <path refid="library.maven:_commons-configuration:commons-configuration:1.6.classpath"/>
+    <path refid="library.maven:_commons-digester:commons-digester:1.8.classpath"/>
+    <path refid="library.maven:_commons-beanutils:commons-beanutils:1.7.0.classpath"/>
+    <path refid="library.maven:_commons-beanutils:commons-beanutils-core:1.8.0.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.10.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-log4j12:1.7.10.classpath"/>
+    <path refid="library.maven:_org.apache.avro:avro:1.7.4.classpath"/>
+    <path refid="library.maven:_com.thoughtworks.paranamer:paranamer:2.3.classpath"/>
+    <path refid="library.maven:_org.xerial.snappy:snappy-java:1.0.4.1.classpath"/>
+    <path refid="library.maven:_com.google.code.gson:gson:2.2.4.classpath"/>
+    <path refid="library.maven:_org.apache.curator:curator-client:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.curator:curator-recipes:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.curator:curator-framework:2.7.1.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:3.0.0.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-compress:1.4.1.classpath"/>
+    <path refid="library.maven:_org.tukaani:xz:1.0.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-hdfs:2.7.1.classpath"/>
+    <path refid="library.maven:_xerces:xercesimpl:2.9.1.classpath"/>
+    <path refid="library.maven:_xml-apis:xml-apis:1.3.04.classpath"/>
+    <path refid="library.maven:_org.fusesource.leveldbjni:leveldbjni-all:1.8.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-mapreduce-client-app:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-mapreduce-client-common:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-yarn-client:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-yarn-server-common:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-mapreduce-client-shuffle:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-yarn-api:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-mapreduce-client-core:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-yarn-common:2.7.1.classpath"/>
+    <path refid="library.maven:_javax.xml.bind:jaxb-api:2.2.2.classpath"/>
+    <path refid="library.maven:_javax.xml.stream:stax-api:1.0-2.classpath"/>
+    <path refid="library.maven:_javax.activation:activation:1.1.classpath"/>
+    <path refid="library.maven:_javax.servlet:servlet-api:2.5.classpath"/>
+    <path refid="library.maven:_com.sun.jersey:jersey-client:1.9.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-xc:1.9.13.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-mapreduce-client-jobclient:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-annotations:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-server:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-common:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-annotations:1.1.2.classpath"/>
+    <pathelement location="${basedir}/../../../usr/lib/jvm/java-8-oracle/lib/tools.jar"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-protocol:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-procedure:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-common:tests:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-client:1.1.2.classpath"/>
+    <path refid="library.maven:_org.jruby.jcodings:jcodings:1.0.8.classpath"/>
+    <path refid="library.maven:_org.jruby.joni:joni:2.1.2.classpath"/>
+    <path refid="library.maven:_commons-httpclient:commons-httpclient:3.1.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.9.classpath"/>
+    <path refid="library.maven:_commons-collections:commons-collections:3.2.1.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-hadoop-compat:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-hadoop2-compat:1.1.2.classpath"/>
+    <path refid="library.maven:_com.yammer.metrics:metrics-core:2.2.0.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:12.0.1.classpath"/>
+    <path refid="library.maven:_com.google.protobuf:protobuf-java:2.5.0.classpath"/>
+    <path refid="library.maven:_com.sun.jersey:jersey-core:1.9.classpath"/>
+    <path refid="library.maven:_com.sun.jersey:jersey-server:1.9.classpath"/>
+    <path refid="library.maven:_asm:asm:3.1.classpath"/>
+    <path refid="library.maven:_commons-cli:commons-cli:1.2.classpath"/>
+    <path refid="library.maven:_commons-io:commons-io:2.4.classpath"/>
+    <path refid="library.maven:_commons-lang:commons-lang:2.6.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.2.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-math:2.2.classpath"/>
+    <path refid="library.maven:_log4j:log4j:1.2.17.classpath"/>
+    <path refid="library.maven:_org.apache.zookeeper:zookeeper:3.4.6.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:jetty:6.1.26.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:jetty-util:6.1.26.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:jetty-sslengine:6.1.26.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:jsp-2.1:6.1.14.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:jsp-api-2.1:6.1.14.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:servlet-api-2.5:6.1.14.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-core-asl:1.9.13.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-mapper-asl:1.9.13.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-jaxrs:1.9.13.classpath"/>
+    <path refid="library.maven:_tomcat:jasper-compiler:5.5.23.classpath"/>
+    <path refid="library.maven:_tomcat:jasper-runtime:5.5.23.classpath"/>
+    <path refid="library.maven:_commons-el:commons-el:1.0.classpath"/>
+    <path refid="library.maven:_org.jamon:jamon-runtime:2.3.1.classpath"/>
+    <path refid="library.maven:_io.netty:netty-all:4.0.23.final.classpath"/>
+    <path refid="library.maven:_org.apache.htrace:htrace-core:3.1.0-incubating.classpath"/>
+    <path refid="library.maven:_com.lmax:disruptor:3.3.0.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-auth:2.5.1.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpclient:4.2.5.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpcore:4.2.4.classpath"/>
+    <path refid="library.maven:_org.apache.directory.server:apacheds-kerberos-codec:2.0.0-m15.classpath"/>
+    <path refid="library.maven:_org.apache.directory.server:apacheds-i18n:2.0.0-m15.classpath"/>
+    <path refid="library.maven:_org.apache.directory.api:api-asn1-api:1.0.0-m20.classpath"/>
+    <path refid="library.maven:_org.apache.directory.api:api-util:1.0.0-m20.classpath"/>
+    <path refid="library.maven:_com.github.stephenc.findbugs:findbugs-annotations:1.3.9-1.classpath"/>
+    <path refid="library.maven:_junit:junit:4.11.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+  </path>
+  
+  <path id="mapreduce.runtime.production.module.classpath">
+    <pathelement location="${mapreduce.output.dir}"/>
+    <path refid="library.commons-logging-1.2.classpath"/>
+    <path refid="library.zookeeper-3.4.6.classpath"/>
+    <path refid="library.hadoop-hdfs-2.5.1.classpath"/>
+    <path refid="library.log4j-1.2.17.classpath"/>
+    <path refid="library.hbase-client-1.1.2.classpath"/>
+    <path refid="library.hbase-common-1.1.2.classpath"/>
+    <path refid="library.hadoop-mapreduce-client-app-2.5.1.classpath"/>
+    <path refid="library.hadoop-mapreduce-client-common-2.5.1.classpath"/>
+    <path refid="library.hadoop-mapreduce-client-core-2.5.1.classpath"/>
+    <pathelement location="${basedir}/../../../media/ubuntu/e7ab5c87-393b-47fb-81ca-71f09f0748e1/hbase-1.1.2/lib/hadoop-mapreduce-client-shuffle-2.5.1.jar"/>
+    <path refid="library.hadoop-mapreduce-client-jobclient-2.5.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-client:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-common:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-math3:3.1.1.classpath"/>
+    <path refid="library.maven:_xmlenc:xmlenc:0.52.classpath"/>
+    <path refid="library.maven:_commons-net:commons-net:3.1.classpath"/>
+    <path refid="library.maven:_javax.servlet.jsp:jsp-api:2.1.classpath"/>
+    <path refid="library.maven:_commons-configuration:commons-configuration:1.6.classpath"/>
+    <path refid="library.maven:_commons-digester:commons-digester:1.8.classpath"/>
+    <path refid="library.maven:_commons-beanutils:commons-beanutils:1.7.0.classpath"/>
+    <path refid="library.maven:_commons-beanutils:commons-beanutils-core:1.8.0.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.10.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-log4j12:1.7.10.classpath"/>
+    <path refid="library.maven:_org.apache.avro:avro:1.7.4.classpath"/>
+    <path refid="library.maven:_com.thoughtworks.paranamer:paranamer:2.3.classpath"/>
+    <path refid="library.maven:_org.xerial.snappy:snappy-java:1.0.4.1.classpath"/>
+    <path refid="library.maven:_com.google.code.gson:gson:2.2.4.classpath"/>
+    <path refid="library.maven:_org.apache.curator:curator-client:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.curator:curator-recipes:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.curator:curator-framework:2.7.1.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:3.0.0.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-compress:1.4.1.classpath"/>
+    <path refid="library.maven:_org.tukaani:xz:1.0.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-hdfs:2.7.1.classpath"/>
+    <path refid="library.maven:_xerces:xercesimpl:2.9.1.classpath"/>
+    <path refid="library.maven:_xml-apis:xml-apis:1.3.04.classpath"/>
+    <path refid="library.maven:_org.fusesource.leveldbjni:leveldbjni-all:1.8.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-mapreduce-client-app:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-mapreduce-client-common:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-yarn-client:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-yarn-server-common:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-mapreduce-client-shuffle:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-yarn-api:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-mapreduce-client-core:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-yarn-common:2.7.1.classpath"/>
+    <path refid="library.maven:_javax.xml.bind:jaxb-api:2.2.2.classpath"/>
+    <path refid="library.maven:_javax.xml.stream:stax-api:1.0-2.classpath"/>
+    <path refid="library.maven:_javax.activation:activation:1.1.classpath"/>
+    <path refid="library.maven:_javax.servlet:servlet-api:2.5.classpath"/>
+    <path refid="library.maven:_com.sun.jersey:jersey-client:1.9.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-xc:1.9.13.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-mapreduce-client-jobclient:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-annotations:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-server:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-common:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-annotations:1.1.2.classpath"/>
+    <pathelement location="${basedir}/../../../usr/lib/jvm/java-8-oracle/lib/tools.jar"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-protocol:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-procedure:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-common:tests:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-client:1.1.2.classpath"/>
+    <path refid="library.maven:_org.jruby.jcodings:jcodings:1.0.8.classpath"/>
+    <path refid="library.maven:_org.jruby.joni:joni:2.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-prefix-tree:1.1.2.classpath"/>
+    <path refid="library.maven:_commons-httpclient:commons-httpclient:3.1.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.9.classpath"/>
+    <path refid="library.maven:_commons-collections:commons-collections:3.2.1.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-hadoop-compat:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-hadoop2-compat:1.1.2.classpath"/>
+    <path refid="library.maven:_com.yammer.metrics:metrics-core:2.2.0.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:12.0.1.classpath"/>
+    <path refid="library.maven:_com.google.protobuf:protobuf-java:2.5.0.classpath"/>
+    <path refid="library.maven:_com.sun.jersey:jersey-core:1.9.classpath"/>
+    <path refid="library.maven:_com.sun.jersey:jersey-server:1.9.classpath"/>
+    <path refid="library.maven:_asm:asm:3.1.classpath"/>
+    <path refid="library.maven:_commons-cli:commons-cli:1.2.classpath"/>
+    <path refid="library.maven:_commons-io:commons-io:2.4.classpath"/>
+    <path refid="library.maven:_commons-lang:commons-lang:2.6.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.2.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-math:2.2.classpath"/>
+    <path refid="library.maven:_log4j:log4j:1.2.17.classpath"/>
+    <path refid="library.maven:_org.apache.zookeeper:zookeeper:3.4.6.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:jetty:6.1.26.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:jetty-util:6.1.26.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:jetty-sslengine:6.1.26.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:jsp-2.1:6.1.14.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:jsp-api-2.1:6.1.14.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:servlet-api-2.5:6.1.14.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-core-asl:1.9.13.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-mapper-asl:1.9.13.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-jaxrs:1.9.13.classpath"/>
+    <path refid="library.maven:_tomcat:jasper-compiler:5.5.23.classpath"/>
+    <path refid="library.maven:_tomcat:jasper-runtime:5.5.23.classpath"/>
+    <path refid="library.maven:_commons-el:commons-el:1.0.classpath"/>
+    <path refid="library.maven:_org.jamon:jamon-runtime:2.3.1.classpath"/>
+    <path refid="library.maven:_io.netty:netty-all:4.0.23.final.classpath"/>
+    <path refid="library.maven:_org.apache.htrace:htrace-core:3.1.0-incubating.classpath"/>
+    <path refid="library.maven:_com.lmax:disruptor:3.3.0.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-auth:2.5.1.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpclient:4.2.5.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpcore:4.2.4.classpath"/>
+    <path refid="library.maven:_org.apache.directory.server:apacheds-kerberos-codec:2.0.0-m15.classpath"/>
+    <path refid="library.maven:_org.apache.directory.server:apacheds-i18n:2.0.0-m15.classpath"/>
+    <path refid="library.maven:_org.apache.directory.api:api-asn1-api:1.0.0-m20.classpath"/>
+    <path refid="library.maven:_org.apache.directory.api:api-util:1.0.0-m20.classpath"/>
+    <path refid="library.maven:_com.github.stephenc.findbugs:findbugs-annotations:1.3.9-1.classpath"/>
+    <path refid="library.maven:_junit:junit:4.11.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+  </path>
+  
+  <path id="mapreduce.module.classpath">
+    <path refid="${module.jdk.classpath.mapreduce}"/>
+    <pathelement location="${mapreduce.output.dir}"/>
+    <path refid="library.commons-logging-1.2.classpath"/>
+    <path refid="library.zookeeper-3.4.6.classpath"/>
+    <path refid="library.hadoop-hdfs-2.5.1.classpath"/>
+    <path refid="library.log4j-1.2.17.classpath"/>
+    <path refid="library.hbase-client-1.1.2.classpath"/>
+    <path refid="library.hbase-common-1.1.2.classpath"/>
+    <path refid="library.hadoop-mapreduce-client-app-2.5.1.classpath"/>
+    <path refid="library.hadoop-mapreduce-client-common-2.5.1.classpath"/>
+    <path refid="library.hadoop-mapreduce-client-core-2.5.1.classpath"/>
+    <pathelement location="${basedir}/../../../media/ubuntu/e7ab5c87-393b-47fb-81ca-71f09f0748e1/hbase-1.1.2/lib/hadoop-mapreduce-client-shuffle-2.5.1.jar"/>
+    <path refid="library.hadoop-mapreduce-client-jobclient-2.5.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-client:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-common:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-math3:3.1.1.classpath"/>
+    <path refid="library.maven:_xmlenc:xmlenc:0.52.classpath"/>
+    <path refid="library.maven:_commons-net:commons-net:3.1.classpath"/>
+    <path refid="library.maven:_javax.servlet.jsp:jsp-api:2.1.classpath"/>
+    <path refid="library.maven:_commons-configuration:commons-configuration:1.6.classpath"/>
+    <path refid="library.maven:_commons-digester:commons-digester:1.8.classpath"/>
+    <path refid="library.maven:_commons-beanutils:commons-beanutils:1.7.0.classpath"/>
+    <path refid="library.maven:_commons-beanutils:commons-beanutils-core:1.8.0.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.10.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-log4j12:1.7.10.classpath"/>
+    <path refid="library.maven:_org.apache.avro:avro:1.7.4.classpath"/>
+    <path refid="library.maven:_com.thoughtworks.paranamer:paranamer:2.3.classpath"/>
+    <path refid="library.maven:_org.xerial.snappy:snappy-java:1.0.4.1.classpath"/>
+    <path refid="library.maven:_com.google.code.gson:gson:2.2.4.classpath"/>
+    <path refid="library.maven:_org.apache.curator:curator-client:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.curator:curator-recipes:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.curator:curator-framework:2.7.1.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:3.0.0.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-compress:1.4.1.classpath"/>
+    <path refid="library.maven:_org.tukaani:xz:1.0.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-hdfs:2.7.1.classpath"/>
+    <path refid="library.maven:_xerces:xercesimpl:2.9.1.classpath"/>
+    <path refid="library.maven:_xml-apis:xml-apis:1.3.04.classpath"/>
+    <path refid="library.maven:_org.fusesource.leveldbjni:leveldbjni-all:1.8.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-mapreduce-client-app:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-mapreduce-client-common:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-yarn-client:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-yarn-server-common:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-mapreduce-client-shuffle:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-yarn-api:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-mapreduce-client-core:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-yarn-common:2.7.1.classpath"/>
+    <path refid="library.maven:_javax.xml.bind:jaxb-api:2.2.2.classpath"/>
+    <path refid="library.maven:_javax.xml.stream:stax-api:1.0-2.classpath"/>
+    <path refid="library.maven:_javax.activation:activation:1.1.classpath"/>
+    <path refid="library.maven:_javax.servlet:servlet-api:2.5.classpath"/>
+    <path refid="library.maven:_com.sun.jersey:jersey-client:1.9.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-xc:1.9.13.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-mapreduce-client-jobclient:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-annotations:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-server:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-common:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-annotations:1.1.2.classpath"/>
+    <pathelement location="${basedir}/../../../usr/lib/jvm/java-8-oracle/lib/tools.jar"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-protocol:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-procedure:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-common:tests:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-client:1.1.2.classpath"/>
+    <path refid="library.maven:_org.jruby.jcodings:jcodings:1.0.8.classpath"/>
+    <path refid="library.maven:_org.jruby.joni:joni:2.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-prefix-tree:1.1.2.classpath"/>
+    <path refid="library.maven:_commons-httpclient:commons-httpclient:3.1.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.9.classpath"/>
+    <path refid="library.maven:_commons-collections:commons-collections:3.2.1.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-hadoop-compat:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-hadoop2-compat:1.1.2.classpath"/>
+    <path refid="library.maven:_com.yammer.metrics:metrics-core:2.2.0.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:12.0.1.classpath"/>
+    <path refid="library.maven:_com.google.protobuf:protobuf-java:2.5.0.classpath"/>
+    <path refid="library.maven:_com.sun.jersey:jersey-core:1.9.classpath"/>
+    <path refid="library.maven:_com.sun.jersey:jersey-server:1.9.classpath"/>
+    <path refid="library.maven:_asm:asm:3.1.classpath"/>
+    <path refid="library.maven:_commons-cli:commons-cli:1.2.classpath"/>
+    <path refid="library.maven:_commons-io:commons-io:2.4.classpath"/>
+    <path refid="library.maven:_commons-lang:commons-lang:2.6.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.2.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-math:2.2.classpath"/>
+    <path refid="library.maven:_log4j:log4j:1.2.17.classpath"/>
+    <path refid="library.maven:_org.apache.zookeeper:zookeeper:3.4.6.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:jetty:6.1.26.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:jetty-util:6.1.26.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:jetty-sslengine:6.1.26.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:jsp-2.1:6.1.14.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:jsp-api-2.1:6.1.14.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:servlet-api-2.5:6.1.14.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-core-asl:1.9.13.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-mapper-asl:1.9.13.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-jaxrs:1.9.13.classpath"/>
+    <path refid="library.maven:_tomcat:jasper-compiler:5.5.23.classpath"/>
+    <path refid="library.maven:_tomcat:jasper-runtime:5.5.23.classpath"/>
+    <path refid="library.maven:_commons-el:commons-el:1.0.classpath"/>
+    <path refid="library.maven:_org.jamon:jamon-runtime:2.3.1.classpath"/>
+    <path refid="library.maven:_io.netty:netty-all:4.0.23.final.classpath"/>
+    <path refid="library.maven:_org.apache.htrace:htrace-core:3.1.0-incubating.classpath"/>
+    <path refid="library.maven:_com.lmax:disruptor:3.3.0.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-auth:2.5.1.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpclient:4.2.5.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpcore:4.2.4.classpath"/>
+    <path refid="library.maven:_org.apache.directory.server:apacheds-kerberos-codec:2.0.0-m15.classpath"/>
+    <path refid="library.maven:_org.apache.directory.server:apacheds-i18n:2.0.0-m15.classpath"/>
+    <path refid="library.maven:_org.apache.directory.api:api-asn1-api:1.0.0-m20.classpath"/>
+    <path refid="library.maven:_org.apache.directory.api:api-util:1.0.0-m20.classpath"/>
+    <path refid="library.maven:_com.github.stephenc.findbugs:findbugs-annotations:1.3.9-1.classpath"/>
+    <path refid="library.maven:_junit:junit:4.11.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+  </path>
+  
+  <path id="mapreduce.runtime.module.classpath">
+    <pathelement location="${mapreduce.testoutput.dir}"/>
+    <pathelement location="${mapreduce.output.dir}"/>
+    <path refid="library.commons-logging-1.2.classpath"/>
+    <path refid="library.zookeeper-3.4.6.classpath"/>
+    <path refid="library.hadoop-hdfs-2.5.1.classpath"/>
+    <path refid="library.log4j-1.2.17.classpath"/>
+    <path refid="library.hbase-client-1.1.2.classpath"/>
+    <path refid="library.hbase-common-1.1.2.classpath"/>
+    <path refid="library.hadoop-mapreduce-client-app-2.5.1.classpath"/>
+    <path refid="library.hadoop-mapreduce-client-common-2.5.1.classpath"/>
+    <path refid="library.hadoop-mapreduce-client-core-2.5.1.classpath"/>
+    <pathelement location="${basedir}/../../../media/ubuntu/e7ab5c87-393b-47fb-81ca-71f09f0748e1/hbase-1.1.2/lib/hadoop-mapreduce-client-shuffle-2.5.1.jar"/>
+    <path refid="library.hadoop-mapreduce-client-jobclient-2.5.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-client:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-common:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-math3:3.1.1.classpath"/>
+    <path refid="library.maven:_xmlenc:xmlenc:0.52.classpath"/>
+    <path refid="library.maven:_commons-net:commons-net:3.1.classpath"/>
+    <path refid="library.maven:_javax.servlet.jsp:jsp-api:2.1.classpath"/>
+    <path refid="library.maven:_commons-configuration:commons-configuration:1.6.classpath"/>
+    <path refid="library.maven:_commons-digester:commons-digester:1.8.classpath"/>
+    <path refid="library.maven:_commons-beanutils:commons-beanutils:1.7.0.classpath"/>
+    <path refid="library.maven:_commons-beanutils:commons-beanutils-core:1.8.0.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-api:1.7.10.classpath"/>
+    <path refid="library.maven:_org.slf4j:slf4j-log4j12:1.7.10.classpath"/>
+    <path refid="library.maven:_org.apache.avro:avro:1.7.4.classpath"/>
+    <path refid="library.maven:_com.thoughtworks.paranamer:paranamer:2.3.classpath"/>
+    <path refid="library.maven:_org.xerial.snappy:snappy-java:1.0.4.1.classpath"/>
+    <path refid="library.maven:_com.google.code.gson:gson:2.2.4.classpath"/>
+    <path refid="library.maven:_org.apache.curator:curator-client:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.curator:curator-recipes:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.curator:curator-framework:2.7.1.classpath"/>
+    <path refid="library.maven:_com.google.code.findbugs:jsr305:3.0.0.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-compress:1.4.1.classpath"/>
+    <path refid="library.maven:_org.tukaani:xz:1.0.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-hdfs:2.7.1.classpath"/>
+    <path refid="library.maven:_xerces:xercesimpl:2.9.1.classpath"/>
+    <path refid="library.maven:_xml-apis:xml-apis:1.3.04.classpath"/>
+    <path refid="library.maven:_org.fusesource.leveldbjni:leveldbjni-all:1.8.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-mapreduce-client-app:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-mapreduce-client-common:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-yarn-client:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-yarn-server-common:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-mapreduce-client-shuffle:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-yarn-api:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-mapreduce-client-core:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-yarn-common:2.7.1.classpath"/>
+    <path refid="library.maven:_javax.xml.bind:jaxb-api:2.2.2.classpath"/>
+    <path refid="library.maven:_javax.xml.stream:stax-api:1.0-2.classpath"/>
+    <path refid="library.maven:_javax.activation:activation:1.1.classpath"/>
+    <path refid="library.maven:_javax.servlet:servlet-api:2.5.classpath"/>
+    <path refid="library.maven:_com.sun.jersey:jersey-client:1.9.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-xc:1.9.13.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-mapreduce-client-jobclient:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-annotations:2.7.1.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-server:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-common:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-annotations:1.1.2.classpath"/>
+    <pathelement location="${basedir}/../../../usr/lib/jvm/java-8-oracle/lib/tools.jar"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-protocol:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-procedure:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-common:tests:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-client:1.1.2.classpath"/>
+    <path refid="library.maven:_org.jruby.jcodings:jcodings:1.0.8.classpath"/>
+    <path refid="library.maven:_org.jruby.joni:joni:2.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-prefix-tree:1.1.2.classpath"/>
+    <path refid="library.maven:_commons-httpclient:commons-httpclient:3.1.classpath"/>
+    <path refid="library.maven:_commons-codec:commons-codec:1.9.classpath"/>
+    <path refid="library.maven:_commons-collections:commons-collections:3.2.1.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-hadoop-compat:1.1.2.classpath"/>
+    <path refid="library.maven:_org.apache.hbase:hbase-hadoop2-compat:1.1.2.classpath"/>
+    <path refid="library.maven:_com.yammer.metrics:metrics-core:2.2.0.classpath"/>
+    <path refid="library.maven:_com.google.guava:guava:12.0.1.classpath"/>
+    <path refid="library.maven:_com.google.protobuf:protobuf-java:2.5.0.classpath"/>
+    <path refid="library.maven:_com.sun.jersey:jersey-core:1.9.classpath"/>
+    <path refid="library.maven:_com.sun.jersey:jersey-server:1.9.classpath"/>
+    <path refid="library.maven:_asm:asm:3.1.classpath"/>
+    <path refid="library.maven:_commons-cli:commons-cli:1.2.classpath"/>
+    <path refid="library.maven:_commons-io:commons-io:2.4.classpath"/>
+    <path refid="library.maven:_commons-lang:commons-lang:2.6.classpath"/>
+    <path refid="library.maven:_commons-logging:commons-logging:1.2.classpath"/>
+    <path refid="library.maven:_org.apache.commons:commons-math:2.2.classpath"/>
+    <path refid="library.maven:_log4j:log4j:1.2.17.classpath"/>
+    <path refid="library.maven:_org.apache.zookeeper:zookeeper:3.4.6.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:jetty:6.1.26.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:jetty-util:6.1.26.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:jetty-sslengine:6.1.26.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:jsp-2.1:6.1.14.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:jsp-api-2.1:6.1.14.classpath"/>
+    <path refid="library.maven:_org.mortbay.jetty:servlet-api-2.5:6.1.14.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-core-asl:1.9.13.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-mapper-asl:1.9.13.classpath"/>
+    <path refid="library.maven:_org.codehaus.jackson:jackson-jaxrs:1.9.13.classpath"/>
+    <path refid="library.maven:_tomcat:jasper-compiler:5.5.23.classpath"/>
+    <path refid="library.maven:_tomcat:jasper-runtime:5.5.23.classpath"/>
+    <path refid="library.maven:_commons-el:commons-el:1.0.classpath"/>
+    <path refid="library.maven:_org.jamon:jamon-runtime:2.3.1.classpath"/>
+    <path refid="library.maven:_io.netty:netty-all:4.0.23.final.classpath"/>
+    <path refid="library.maven:_org.apache.htrace:htrace-core:3.1.0-incubating.classpath"/>
+    <path refid="library.maven:_com.lmax:disruptor:3.3.0.classpath"/>
+    <path refid="library.maven:_org.apache.hadoop:hadoop-auth:2.5.1.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpclient:4.2.5.classpath"/>
+    <path refid="library.maven:_org.apache.httpcomponents:httpcore:4.2.4.classpath"/>
+    <path refid="library.maven:_org.apache.directory.server:apacheds-kerberos-codec:2.0.0-m15.classpath"/>
+    <path refid="library.maven:_org.apache.directory.server:apacheds-i18n:2.0.0-m15.classpath"/>
+    <path refid="library.maven:_org.apache.directory.api:api-asn1-api:1.0.0-m20.classpath"/>
+    <path refid="library.maven:_org.apache.directory.api:api-util:1.0.0-m20.classpath"/>
+    <path refid="library.maven:_com.github.stephenc.findbugs:findbugs-annotations:1.3.9-1.classpath"/>
+    <path refid="library.maven:_junit:junit:4.11.classpath"/>
+    <path refid="library.maven:_org.hamcrest:hamcrest-core:1.3.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.mapreduce">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.mapreduce">
+    <patternset refid="excluded.from.module.mapreduce"/>
+  </patternset>
+  
+  <path id="mapreduce.module.sourcepath">
+    <dirset dir="${module.mapreduce.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  <path id="mapreduce.module.test.sourcepath">
+    <dirset dir="${module.mapreduce.basedir}">
+      <include name="src/test/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.mapreduce" depends="compile.module.mapreduce.production,compile.module.mapreduce.tests" description="Compile module MapReduce"/>
+  
+  <target name="compile.module.mapreduce.production" depends="register.custom.compilers" description="Compile module MapReduce; production classes">
+    <mkdir dir="${mapreduce.output.dir}"/>
+    <javac2 destdir="${mapreduce.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.mapreduce}/javac">
+      <compilerarg line="${compiler.args.mapreduce}"/>
+      <bootclasspath refid="mapreduce.module.bootclasspath"/>
+      <classpath refid="mapreduce.module.production.classpath"/>
+      <src refid="mapreduce.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.mapreduce"/>
+    </javac2>
+    
+    <copy todir="${mapreduce.output.dir}">
+      <fileset dir="${module.mapreduce.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.mapreduce.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.mapreduce.tests" depends="register.custom.compilers,compile.module.mapreduce.production" description="compile module MapReduce; test classes" unless="skip.tests">
+    <mkdir dir="${mapreduce.testoutput.dir}"/>
+    <javac2 destdir="${mapreduce.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.mapreduce}/javac">
+      <compilerarg line="${compiler.args.mapreduce}"/>
+      <bootclasspath refid="mapreduce.module.bootclasspath"/>
+      <classpath refid="mapreduce.module.classpath"/>
+      <src refid="mapreduce.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.mapreduce"/>
+    </javac2>
+    
+    <copy todir="${mapreduce.testoutput.dir}">
+      <fileset dir="${module.mapreduce.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.mapreduce" description="cleanup module">
+    <delete dir="${mapreduce.output.dir}"/>
+    <delete dir="${mapreduce.testoutput.dir}"/>
+  </target>
+</project>
